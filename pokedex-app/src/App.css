@@ -1,0 +1,67 @@
+html {
+    background-color: #dee2e4;
+}
+
+.App {
+    font-family: 'Pokemon-GB';
+    background-color: #dee2e4;
+}
+
+.pokedex-banner{
+    height: 50px;
+    color: white;
+    font-size: 40px;
+    background-color: #e53e3c;
+    border-left: 25px solid #8e1b28;
+    border-right: 25px solid #8e1b28;
+}
+
+.pokedex-banner-bottom{
+    border-bottom: 5px solid #2b2c2f;
+}
+
+.pokedex-grid{
+    margin: 40px;
+    width: calc(100px * 4);
+}
+
+.pokemon-box{
+    color: #6f7279;
+    position: relative;
+    height: 100px;
+    width: 100px;
+    border: 2px solid #6f7279;
+    padding: 5px;
+    margin-top: -2px;
+    margin-left: -2px;
+}
+
+.pokemon-box:hover{
+    background-color: #b3b8ba;
+}
+
+.pokemon-sprite-small{
+    bottom: 0px;
+    right: 0px;
+    height: 90px;
+    position: absolute;
+}
+
+@font-face {
+    font-family: 'Pokemon-GB';
+    src:url('font/Pokemon-GB.ttf.woff') format('woff'),
+        url('font/Pokemon-GB.ttf.svg#Pokemon-GB') format('svg'),
+        url('font/Pokemon-GB.ttf.eot'),
+        url('font/Pokemon-GB.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
