@@ -13,7 +13,6 @@ export class Pokemon extends Component {
         .then(res => res.json())
         .then((data) => {
             this.setState({ data: data, });
-            console.log(this.state.data);
         })
         .catch(console.log)
     }
@@ -22,15 +21,19 @@ export class Pokemon extends Component {
         let id;
         let sprite;
 
-        if(this.state.data != ' '){
-            id = this.state.data.id;
+        if(this.state.data !== ' '){
+            id = ("00" + this.state.data.id).slice(-3);
             sprite = this.state.data.sprites.front_default;
         }
 
         return(
-            <div className="pokemon-box">
+            <a
+                className="pokemon-box"
+                onClick={() => this.props.onClick(this.state.data)}
+                href="javascript:void(0)"
+            >
                 {id}<br></br>
                 <img className="pokemon-sprite-small" src={sprite} alt="sprite" />
-            </div>);
+            </a>);
     }
 }
