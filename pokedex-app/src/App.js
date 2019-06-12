@@ -20,6 +20,7 @@ class App extends Component {
         .catch(console.log)
     }
 
+    // loads a paginated list of pokemon from URL
     loadList(url) {
         fetch(url)
         .then(res => res.json())
@@ -29,10 +30,12 @@ class App extends Component {
         .catch(console.log)
     }
 
+    // click handle method for selecting a pokemon
     selectPokemon(pokemon){
         this.setState({ selected: pokemon, });
     }
 
+    // creates and returns a list of pokemon components for display of paginated list
     renderPokedex() {
         let pokemonList = [];
         if (this.state.pokemon.results) {
@@ -50,26 +53,57 @@ class App extends Component {
         return pokemonList;
     }
 
+    // creates and returns an array of pokemon type JSX elements for a pokemon
     getTypes(pokemon) {
+        let types = [];
         for(let i = 0; i < pokemon.types.length; i++) {
-
+            const type = pokemon.types[i].type.name;
+            types.push(
+                <span
+                    className={"b-outline type type-" + type}
+                >
+                    {type}
+                </span>
+            );
         }
+        return types;
     }
 
     render () {
-        let sprite, id, name, types, height, weight;
+        let sprite, title, types, stats;
 
         if(this.state.selected !== ' ') {
             const pokemon = this.state.selected;
-            sprite = pokemon.sprites.front_default;
-            id = pokemon.id;
-            name = pokemon.name;
+            sprite = <img
+                className="pokemon-sprite-large"
+                src={pokemon.sprites.front_default} alt="sprite"
+            />;
+            let id = ("00" + pokemon.id).slice(-3);
+            let name = pokemon.name;
+            title =
+            <div className="pokemon-title">
+                <div className="pokemon-id b-outline">{id}</div>
+                <div className="pokemon-name">{name}</div>
+            </div>;
             types = this.getTypes(pokemon);
+            let height = pokemon.height;
+            let weight = pokemon.weight;
+            stats =
+            <div className="pokemon-title height-weight position-relative">
+                <div className="pokemon-height row justify-content-between">
+                    <div className="col-auto">HT</div>
+                    <div className="col-auto">{height}</div>
+                </div>
+                <div className="pokemon-weight row justify-content-between">
+                    <div className="col-auto">WT</div>
+                    <div className="col-auto">{weight}</div>
+                </div>
+            </div>;
         }
 
         return (
             <div className="App">
-                <div className="container-fluid pokedex-banner">
+                <div className="container-fluid pokedex-banner b-outline">
                     Pokedex
                 </div>
                 <div className="container-fluid pokedex-banner-bottom"></div>
@@ -98,12 +132,13 @@ class App extends Component {
                     <div className="pokedex-data col-auto">
                         <div className="row">
                             <div className="col-5">
-                                <img className="pokemon-sprite-large" src={sprite} alt="sprite" />
+                                {sprite}
                             </div>
                             <div className="col-7">
+                                {title}
+                                {types}
+                                {stats}
                             </div>
-                        </div>
-                        <div className="row">
                         </div>
                     </div>
                 </div>
