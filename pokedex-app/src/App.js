@@ -61,6 +61,7 @@ class App extends Component {
             types.push(
                 <span
                     className={"b-outline type type-" + type}
+                    key={type}
                 >
                     {type}
                 </span>
